@@ -38,15 +38,15 @@ const result = document.getElementById('result');
  * Display correct message in response to any user input into `inputBox`.
  */
 const handleEvent = function handleEvent() {
+  result.style.color = 'darkRed';
+  result.style.fontWeight = 'bold';
   if (!isPos(inputBox.value)) {
-    result.style.setProperty('color', 'darkred');
-    result.innerHTML = '<b>Input must be a positive number.</b>';
+    result.innerHTML = 'Input must be a positive number.';
   } else if (!isPal(inputBox.value)) {
-    result.style.setProperty('color', 'darkred');
-    result.innerHTML = '<b>No. Try again</b>';
+    result.innerHTML = 'No. Try again';
   } else {
-    result.style.setProperty('color', 'darkgreen');
-    result.innerHTML = '<b>Yes. This is a palindrome!</b>';
+    result.style.color = 'darkGreen';
+    result.innerHTML = 'Yes. This is a palindrome!';
   }
 };
 
