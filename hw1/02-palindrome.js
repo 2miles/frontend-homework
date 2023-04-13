@@ -39,7 +39,6 @@ const result = document.getElementById('result');
  */
 const handleEvent = function handleEvent() {
   result.style.color = 'darkRed';
-  result.style.fontWeight = 'bold';
   if (!isPos(inputBox.value)) {
     result.innerHTML = 'Input must be a positive number.';
   } else if (!isPal(inputBox.value)) {
