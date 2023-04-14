@@ -40,7 +40,6 @@ const result = document.getElementById('result');
 const handleEvent = function handleEvent() {
   result.style.color = 'darkRed';
   result.style.fontWeight = 'bold';
-
   if (!isPositive(inputBox.value)) {
     result.innerHTML = 'Input must be a positive number.';
   } else if (!isPalindrome(inputBox.value)) {
