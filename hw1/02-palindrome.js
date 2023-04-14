@@ -10,7 +10,7 @@
  * '1.23' : true \
  * 'Infinity' : true
  */
-const isPos = function isPositiveNumber(str) {
+const isPositive = function isPositiveNumber(str) {
   if (!Number.isNaN(str) && Number(str) > 0) {
     return true;
   }
@@ -20,7 +20,7 @@ const isPos = function isPositiveNumber(str) {
 /**
  * Checks if a string is a palindrome or not.
  */
-const isPal = function isPalindrome(str) {
+const isPalindrome = function isPalindrome(str) {
   const len = str.length;
   const halfway = Math.floor(len / 2);
   for (let i = 0; i < halfway; i += 1) {
@@ -40,9 +40,10 @@ const result = document.getElementById('result');
 const handleEvent = function handleEvent() {
   result.style.color = 'darkRed';
   result.style.fontWeight = 'bold';
-  if (!isPos(inputBox.value)) {
+
+  if (!isPositive(inputBox.value)) {
     result.innerHTML = 'Input must be a positive number.';
-  } else if (!isPal(inputBox.value)) {
+  } else if (!isPalindrome(inputBox.value)) {
     result.innerHTML = 'No. Try again';
   } else {
     result.style.color = 'darkGreen';
