@@ -23,29 +23,22 @@ const findWord = function findWord(word, text) {
 };
 
 const clearDivText = function clearDivText(elementID) {
-  document.getElementById(elementID).innerText = '';
+  document.getElementById(elementID).innerHTML = '';
 };
 
 const handleInput = function handleInput() {
   const paragraph = document.getElementById('paragraph');
   clearDivText('paragraph');
-  const resultIndex = findWord(inputBox.value, paragraphText);
-  paragraph.innerHTML = paragraphText.substring(0, resultIndex + 1);
-  const highlighted = document.createElement('span');
-  highlighted.innerHTML = paragraphText.substring(
-    resultIndex + 1,
-    resultIndex + 1 + inputBox.value.length,
-  );
-  highlighted.style.backgroundColor = 'yellow';
-  paragraph.append(highlighted);
-  paragraph.append(
-    paragraphText.substring(
-      resultIndex + 1 + inputBox.value.length,
-      paragraphText.length,
-    ),
-  );
-
-  console.log(resultIndex);
+  const loc = findWord(inputBox.value, paragraphText);
+  paragraph.innerHTML = paragraphText.substring(0, loc + 1);
+  const spanElem = document.createElement('span');
+  const len = inputBox.value.length;
+  const start = loc + 1;
+  const end = start + len;
+  spanElem.innerHTML = paragraphText.substring(start, end);
+  spanElem.style.backgroundColor = 'yellow';
+  paragraph.append(spanElem);
+  paragraph.append(paragraphText.substring(end, paragraphText.length));
 };
 
 // inputBox.addEventListener('keydown', handleKeyDown);
