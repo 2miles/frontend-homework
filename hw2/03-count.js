@@ -22,9 +22,30 @@ const findWord = function findWord(word, text) {
   return text.search(re);
 };
 
+const clearDivText = function clearDivText(elementID) {
+  document.getElementById(elementID).innerText = '';
+};
+
 const handleInput = function handleInput() {
-  const result = findWord(inputBox.value, paragraphText);
-  console.log(result);
+  const paragraph = document.getElementById('paragraph');
+  clearDivText('paragraph');
+  const resultIndex = findWord(inputBox.value, paragraphText);
+  paragraph.innerHTML = paragraphText.substring(0, resultIndex + 1);
+  const highlighted = document.createElement('span');
+  highlighted.innerHTML = paragraphText.substring(
+    resultIndex + 1,
+    resultIndex + 1 + inputBox.value.length,
+  );
+  highlighted.style.backgroundColor = 'yellow';
+  paragraph.append(highlighted);
+  paragraph.append(
+    paragraphText.substring(
+      resultIndex + 1 + inputBox.value.length,
+      paragraphText.length,
+    ),
+  );
+
+  console.log(resultIndex);
 };
 
 // inputBox.addEventListener('keydown', handleKeyDown);
