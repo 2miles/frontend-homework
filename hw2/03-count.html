@@ -13,27 +13,44 @@
       span {
         background-color: yellow;
       }
+      body {
+        background-color: #01425c;
+      }
+      @media (min-width: 480px) {
+        .container-sm {
+          max-width: 580px;
+        }
+      }
     </style>
   </head>
   <body>
     <main>
-      <h1>Exercise 03 - Count</h1>
-      <hr />
-      <div>
-        <label>Highlight all occurrences of a word:</label>
-        <input />
-      </div>
-      <hr />
-      <div id="paragraph">
-        It was the best of times, it was the worst of times, it was the age of
-        wisdom, it was the age of foolishness, it was the epoch of belief, it
-        was the epoch of incredulity, it was the season of Light, it was the
-        season of Darkness, it was the spring of hope, it was the winter of
-        despair, we had everything before us, we had nothing before us, we were
-        all going direct to Heaven, we were all going direct the other way—in
-        short, the period was so far like the present period, that some of its
-        noisiest authorities insisted on its being received, for good or for
-        evil, in the superlative degree of comparison only.
+      <div class="d-flex justify-content-center">
+        <section>
+          <div class="container-sm border rounded mt-5 p-3 bg-light">
+            <div class="d-flex flex-column">
+              <h1 class="align-self-center pt-2">Exercise 03 - Count</h1>
+              <hr />
+              <div>
+                <label>Highlight all occurrences of a word:</label>
+                <input />
+              </div>
+              <hr />
+              <div id="paragraph">
+                It was the best of times, it was the worst of times, it was the
+                age of wisdom, it was the age of foolishness, it was the epoch
+                of belief, it was the epoch of incredulity, it was the season of
+                Light, it was the season of Darkness, it was the spring of hope,
+                it was the winter of despair, we had everything before us, we
+                had nothing before us, we were all going direct to Heaven, we
+                were all going direct the other way—in short, the period was so
+                far like the present period, that some of its noisiest
+                authorities insisted on its being received, for good or for
+                evil, in the superlative degree of comparison only.
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </main>
   </body>

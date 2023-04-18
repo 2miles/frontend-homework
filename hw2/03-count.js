@@ -8,12 +8,12 @@ const isOneWord = function isOneWord(word) {
 };
 
 /**
- * Searches through `originalText` for every instance of `userInput` and if
- * found as a 'singular word' then wraps it in a HTML span tag so that it can
- * be highlighted with CSS.
+ * Searches through `originalText` for every instance of `userInput` as a
+ * 'singular word' then wraps it in a HTML span tag so that it can be
+ * highlighted with CSS.
  *
- * 'singular word' is defined here as any any contiguous text starting with a
- * blank space or a em-dash, and ending with either a comma, period, em-dash or
+ * 'singular word' is defined here as any any contiguous text preceded by a
+ * blank space or a em-dash, and succeeded by either a comma, period, em-dash or
  * a blank space. `userInput`'s leading and trailing whitespace is not considered.
  * Multiple words or partial words will not be matched.
  *
