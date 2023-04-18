@@ -1,10 +1,5 @@
-/* eslint-disable no-console */
-
-const inputBox = document.querySelector('input');
-const oldText = document.querySelector('#paragraph').textContent;
-
 /**
- * Returns false if `word` is actually multiple words.
+ * Returns false if `word` is separated by any blank spaces.
  */
 const isOneWord = function isOneWord(word) {
   const trimmedWord = word.trim();
@@ -13,32 +8,39 @@ const isOneWord = function isOneWord(word) {
 };
 
 /**
- * Returns false if `word` is actually multiple words.
+ * Searches through `originalText` for every instance of `userInput` and if
+ * found as a 'singular word' then wraps it in a HTML span tag so that it can
+ * be highlighted with CSS.
+ *
+ * 'singular word' is defined here as any any contiguous text starting with a
+ * blank space or a em-dash, and ending with either a comma, period, em-dash or
+ * a blank space. `userInput`'s leading and trailing whitespace is not considered.
+ * Multiple words or partial words will not be matched.
+ *
+ * @todo Find a better (less brute-forced and less paragraph-specific) way
+ * to search-and-replace using regex.
  */
-const replace = function replace(text, pattern, replacement) {
-  const re = new RegExp(pattern, 'g');
-  return text.replace(re, replacement);
-};
-
-const highlightWords = function highlightWords() {
-  let text = oldText;
-  const word = inputBox.value.trim();
-  if (isOneWord(word) === false) {
-    document.getElementById('paragraph').innerHTML = oldText;
+const highlight = function highlight(originalText, userInput) {
+  const paragraph = document.querySelector('#paragraph');
+  const word = userInput.trim();
+  if (!isOneWord(word)) {
+    paragraph.textContent = originalText;
     return;
   }
-  text = replace(text, `[\\s]${word}[\\s]`, ` <span>${word}</span> `);
-  text = replace(text, `[\\s]${word}[,]`, ` <span>${word}</span>,`);
-  text = replace(text, `[\\s]${word}[.]`, ` <span>${word}</span>.`);
-  text = replace(text, `[\\s]${word}[—]`, ` <span>${word}</span>—`);
-  text = replace(text, `[—]${word}[\\s]`, `—<span>${word}</span> `);
-
-  document.getElementById('paragraph').innerHTML = text;
+  let text = originalText;
+  text = text.replace(RegExp(` ${word}[\\s]`, 'g'), ` <span>${word}</span> `);
+  text = text.replace(RegExp(` ${word}[,]`, 'g'), ` <span>${word}</span>,`);
+  text = text.replace(RegExp(` ${word}[.]`), ` <span>${word}</span>.`);
+  text = text.replace(RegExp(` ${word}[—]`, 'g'), ` <span>${word}</span>—`);
+  text = text.replace(RegExp(`[—]${word}[\\s]`, 'g'), `—<span>${word}</span> `);
+  paragraph.innerHTML = text;
 };
 
 const handleInput = function handleInput() {
-  highlightWords();
+  const text = document.querySelector('#paragraph').textContent;
+  const userInput = document.querySelector('input').value;
+  highlight(text, userInput);
 };
 
-// inputBox.addEventListener('keydown', handleKeyDown);
+const inputBox = document.querySelector('input');
 inputBox.addEventListener('input', handleInput);
