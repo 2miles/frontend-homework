@@ -22,17 +22,18 @@
     <main>
       <div class="d-flex justify-content-center">
         <div class="container-sm border rounded mt-5 p-3 bg-light">
-          <form>
+          <form id="form">
             <div class="d-flex justify-content-center">
-              <h2>Exercise 05 - Form</h2>
+              <h1>Exercise 05 - Form</h1>
             </div>
             <div class="form-group my-3">
-              <label for="fullName" class="fw-bold">Full Name: </label>
+              <label for="full_name" class="fw-bold">Full Name: </label>
               <input
                 type="text"
                 class="form-control"
                 name="full_name"
                 id="full_name"
+                required
               />
             </div>
             <div class="form-group my-3">
@@ -42,6 +43,7 @@
                 class="form-control"
                 name="email"
                 id="email"
+                required
               />
             </div>
             <div class="form-group my-3">
@@ -52,24 +54,23 @@
                 class="form-select my-3"
                 name="registration"
                 id="registration"
+                required
               >
-                <option selected>Choose an Option.</option>
+                <option selected value="">Choose an Option.</option>
                 <option value="1">Enrolled</option>
                 <option value="2">Waitlisted</option>
               </select>
             </div>
             <fieldset>
-              <legend>
-                <h6 class="fw-bold">
-                  Have you taken any of the following courses?
-                </h6>
+              <legend class="fs-6 fw-bold">
+                Have you taken any of the following courses?
               </legend>
               <div class="form-check">
                 <input
                   class="form-check-input"
                   type="checkbox"
                   name="courses"
-                  value="programming_languages"
+                  value="Programming Languages"
                   id="programming_languages"
                 />
                 <label class="form-check-label" for="programming_languages">
@@ -81,7 +82,7 @@
                   class="form-check-input"
                   type="checkbox"
                   name="courses"
-                  value="operating_systems"
+                  value="Operating Systems"
                   id="operating_systems"
                 />
                 <label class="form-check-label" for="operating_systems">
@@ -93,7 +94,7 @@
                   class="form-check-input"
                   type="checkbox"
                   name="courses"
-                  value="web_development"
+                  value="Full Stack Web Development"
                   id="web_development"
                 />
                 <label class="form-check-label" for="web_development">
