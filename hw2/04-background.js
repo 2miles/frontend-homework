@@ -52,13 +52,11 @@ const handleButtonEvent = function handleButtonEvent() {
   if (btn.classList.contains('start')) {
     setRandomBGColor();
     btn.classList.remove('start');
-    btn.classList.add('stop');
     btn.classList.remove('btn-primary');
     btn.classList.add('btn-danger');
     btn.textContent = 'Stop';
     intervalID = setInterval(setRandomBGColor, interval);
   } else {
-    btn.classList.remove('stop');
     btn.classList.add('start');
     btn.classList.remove('btn-danger');
     btn.classList.add('btn-primary');
