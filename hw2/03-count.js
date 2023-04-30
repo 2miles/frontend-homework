@@ -43,4 +43,6 @@ const handleInput = function handleInput() {
 };
 
 const inputBox = document.querySelector('input');
-inputBox.addEventListener('input', handleInput);
+inputBox.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') handleInput();
+});
