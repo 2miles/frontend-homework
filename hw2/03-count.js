@@ -8,7 +8,7 @@ const isOneWord = function isOneWord(word) {
 };
 
 /**
- * Searches through `originalText` for every instance of `userInput` as a
+ * Searches through paragraph for every instance of `userInput` as a
  * 'singular word' then wraps it in a HTML span tag so that it can be
  * highlighted with CSS.
  *
@@ -20,26 +20,18 @@ const isOneWord = function isOneWord(word) {
  * @todo Find a better (less brute-forced and less paragraph-specific) way
  * to search-and-replace using regex.
  */
-const highlight = function highlight(originalText, userInput) {
+const handleInput = function handleInput() {
   const paragraph = document.querySelector('#paragraph');
+  let text = document.querySelector('#paragraph').textContent;
+  const userInput = document.querySelector('input').value;
   const word = userInput.trim();
-  if (!isOneWord(word)) {
-    paragraph.textContent = originalText;
-    return;
-  }
-  let text = originalText;
+  if (!isOneWord(word)) return;
   text = text.replace(RegExp(` ${word}[\\s]`, 'g'), ` <span>${word}</span> `);
   text = text.replace(RegExp(` ${word}[,]`, 'g'), ` <span>${word}</span>,`);
   text = text.replace(RegExp(` ${word}[.]`), ` <span>${word}</span>.`);
   text = text.replace(RegExp(` ${word}[—]`, 'g'), ` <span>${word}</span>—`);
   text = text.replace(RegExp(`[—]${word}[\\s]`, 'g'), `—<span>${word}</span> `);
   paragraph.innerHTML = text;
-};
-
-const handleInput = function handleInput() {
-  const text = document.querySelector('#paragraph').textContent;
-  const userInput = document.querySelector('input').value;
-  highlight(text, userInput);
 };
 
 const inputBox = document.querySelector('input');
