@@ -10,9 +10,9 @@ function getRandomInt(max) {
  * Returns a random hsla color string with a 0.5 alpha value
  */
 const buildColor = function buildHslaColor() {
-  const h = getRandomInt(360 + 1).toString();
-  const s = getRandomInt(100 + 1).toString();
-  const l = getRandomInt(100 + 1).toString();
+  const h = getRandomInt(360 + 1);
+  const s = getRandomInt(100 + 1);
+  const l = getRandomInt(100 + 1);
   return `hsla(${h}, ${s}%, ${l}%, 0.5)`;
 };
 
@@ -50,6 +50,7 @@ let intervalID = null;
 
 const handleButtonEvent = function handleButtonEvent() {
   if (btn.classList.contains('start')) {
+    setRandomBGColor();
     btn.classList.remove('start');
     btn.classList.add('stop');
     btn.classList.remove('btn-primary');
