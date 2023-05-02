@@ -29,28 +29,61 @@ const borderColors = [
 /**
  * Removes typos and sorts the the GOT family name array.
  */
-const cleanNames = function cleanNames(familyArr) {
-  const families = familyArr;
-  familyArr.forEach((e, index) => {
-    let newE = e;
-    if (e.includes('House')) {
-      newE = e.split(' ').slice(1).join(' ');
-      families[index] = newE;
+const cleanFamilyNames = function cleanFamilyNames(familyNames) {
+  const names = familyNames;
+  names.forEach((name, index) => {
+    let goodName = name;
+    if (name.includes('House')) {
+      goodName = name.split(' ').slice(1).join(' ');
+      names[index] = goodName;
     }
-    if (e === '') {
-      newE = 'None';
-    } else if (e.includes('Targar')) {
-      newE = 'Targaryen';
-    } else if (e.includes('Unk')) {
-      newE = 'Unknown';
-    } else if (e.includes('Lan')) {
-      newE = 'Lannister';
-    } else if (e.includes('Lor')) {
-      newE = 'Lorath';
+    if (name === '') {
+      goodName = 'None';
+    } else if (name.includes('Targar')) {
+      goodName = 'Targaryen';
+    } else if (name.includes('Unk')) {
+      goodName = 'Unknown';
+    } else if (name.includes('Lan')) {
+      goodName = 'Lannister';
+    } else if (name.includes('Lor')) {
+      goodName = 'Lorath';
     }
-    families[index] = newE;
+    names[index] = goodName;
   });
-  return families.sort();
+  return names.sort();
+};
+
+/**
+ * Uses array destructuring and the set constructor to remove duplicates
+ */
+const buildLabels = function buildLabels(families) {
+  return [...new Set(families)];
+};
+
+/**
+ * Return a list of counts of people with each name.
+ */
+const buildCounts = function buildCounts(people, names) {
+  const counts = [];
+  names.forEach((name, nameIndex) => {
+    counts[nameIndex] = 0;
+    people.forEach((person) => {
+      if (person === names[nameIndex]) {
+        counts[nameIndex] += 1;
+      }
+    });
+  });
+  return counts;
+};
+
+/**
+ * Display the names and the counts.
+ * For debugging.
+ */
+const displayCounts = function display(names, count) {
+  names.forEach((name, index) => {
+    console.log('Name: ', name, ', Count', count[index]);
+  });
 };
 
 // url for the Thrones API
@@ -59,17 +92,15 @@ const url = 'https://thronesapi.com/api/v2/Characters';
 fetch(url)
   .then((res) => res.json())
   .then((data) => {
-    console.log(data);
-    // const characters = data;
-    // characters.forEach((character) => {
-    // });
     const gotData = data;
-    const families = [];
-    gotData.forEach((character) => {
-      families.push(character.family);
+    const people = [];
+    gotData.forEach((person) => {
+      people.push(person.family);
     });
-    cleanNames(families);
-    console.log(families);
+    cleanFamilyNames(people);
+    const names = buildLabels(people);
+    const counts = buildCounts(people, names);
+    displayCounts(names, counts);
   })
   .catch((err) => console.log(err));
 
