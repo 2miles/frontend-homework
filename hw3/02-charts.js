@@ -56,14 +56,14 @@ const cleanFamilyNames = function cleanFamilyNames(familyNames) {
 /**
  * Uses array destructuring and the set constructor to remove duplicates
  */
-const buildLabels = function buildLabels(families) {
+const buildNameList = function buildNameList(families) {
   return [...new Set(families)];
 };
 
 /**
  * Return a list of counts of people with each name.
  */
-const buildCounts = function buildCounts(people, names) {
+const buildCountList = function buildCountList(people, names) {
   const counts = [];
   names.forEach((name, nameIndex) => {
     counts[nameIndex] = 0;
@@ -98,8 +98,8 @@ fetch(url)
       people.push(person.family);
     });
     cleanFamilyNames(people);
-    const names = buildLabels(people);
-    const counts = buildCounts(people, names);
+    const names = buildNameList(people);
+    const counts = buildCountList(people, names);
     displayCounts(names, counts);
   })
   .catch((err) => console.log(err));
