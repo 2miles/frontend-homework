@@ -68,7 +68,7 @@ const buildCountList = function buildCountList(people, names) {
   names.forEach((name, nameIndex) => {
     counts[nameIndex] = 0;
     people.forEach((person) => {
-      if (person === names[nameIndex]) {
+      if (person === name) {
         counts[nameIndex] += 1;
       }
     });
@@ -88,34 +88,20 @@ const displayCounts = function display(names, count) {
 
 // url for the Thrones API
 const url = 'https://thronesapi.com/api/v2/Characters';
-
-fetch(url)
-  .then((res) => res.json())
-  .then((data) => {
-    const gotData = data;
-    const people = [];
-    gotData.forEach((person) => {
-      people.push(person.family);
-    });
-    cleanFamilyNames(people);
-    const names = buildNameList(people);
-    const counts = buildCountList(people, names);
-    displayCounts(names, counts);
-  })
-  .catch((err) => console.log(err));
+let names = [];
+let counts = [];
 
 const renderChart = () => {
   const donutChart = document.querySelector('.donut-chart');
-
   // eslint-disable-next-line no-new, no-undef
   new Chart(donutChart, {
     type: 'doughnut',
     data: {
-      labels: ['label', 'label', 'label', 'label'],
+      labels: names,
       datasets: [
         {
           label: 'My First Dataset',
-          data: [1, 12, 33, 5],
+          data: counts,
           backgroundColor: backgroundColors,
           borderColor: borderColors,
           borderWidth: 1,
@@ -125,4 +111,22 @@ const renderChart = () => {
   });
 };
 
-renderChart();
+fetch(url)
+  .then((res) => res.json())
+  .then((data) => {
+    const gotData = data;
+    console.log(data);
+    const people = [];
+    gotData.forEach((person) => {
+      people.push(person.family);
+    });
+    // cleanFamilyNames(people);
+    console.log(people);
+    names = buildNameList(people);
+    counts = buildCountList(people, names);
+    displayCounts(names, counts);
+  })
+  .then(renderChart)
+  .catch((err) => console.log(err));
+
+// renderChart();
