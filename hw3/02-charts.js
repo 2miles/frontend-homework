@@ -100,6 +100,11 @@ const renderChart = () => {
         },
       ],
     },
+    options: {
+      legend: {
+        display: false,
+      },
+    },
   });
 };
 
