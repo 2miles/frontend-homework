@@ -28,16 +28,16 @@ const borderColors = [
 /**
  * Uses array destructuring and the Set constructor to remove duplicates
  */
-const removeDups = function removeDups(arr) {
+const removeDupes = function removeDupes(arr) {
   return [...new Set(arr)];
 };
+
 /**
- * Removes typos and removes everyone who is not in a house.
+ * Returns an array without typos and everyone who is not in a house removed.
  */
-const cleanNames = function cleanNames(familyNames) {
-  const names = familyNames;
-  const goodNames = [];
-  names.forEach((name, index) => {
+const cleanNames = function cleanNames(data) {
+  const result = [];
+  data.forEach((name) => {
     let goodName = name;
     if (name.includes('Targar')) {
       goodName = 'House Targaryen';
@@ -53,26 +53,20 @@ const cleanNames = function cleanNames(familyNames) {
     } else if (name.includes('Tyrell')) {
       goodName = 'House Tyrell';
     }
-    names[index] = goodName;
+    result.push(goodName);
   });
-  names.forEach((name) => {
-    if (name.includes('House')) {
-      goodNames.push(name);
-    }
-  });
-  goodNames.sort();
-  return goodNames;
+  return result.filter((name) => name.includes('House')).sort();
 };
 
 /**
- * Return a list of counts of people with each name.
+ * Return a array of counts of people in each house.
  */
 const buildCountList = function buildCountList(people, houses) {
   const counts = [];
-  houses.forEach((house, index) => {
+  houses.forEach((houseName, index) => {
     counts[index] = 0;
-    people.forEach((person) => {
-      if (person === house) {
+    people.forEach((name) => {
+      if (name === houseName) {
         counts[index] += 1;
       }
     });
@@ -80,8 +74,8 @@ const buildCountList = function buildCountList(people, houses) {
   return counts;
 };
 
-let houses = [];
-let counts = [];
+let houseNameLabels = [];
+let houseNameCounts = [];
 
 const renderChart = () => {
   const donutChart = document.querySelector('.donut-chart');
@@ -89,11 +83,11 @@ const renderChart = () => {
   new Chart(donutChart, {
     type: 'doughnut',
     data: {
-      labels: houses,
+      labels: houseNameLabels,
       datasets: [
         {
           label: 'My First Dataset',
-          data: counts,
+          data: houseNameCounts,
           backgroundColor: backgroundColors,
           borderColor: borderColors,
           borderWidth: 1,
@@ -113,16 +107,13 @@ const url = 'https://thronesapi.com/api/v2/Characters';
 fetch(url)
   .then((res) => res.json())
   .then((data) => {
-    const gotData = data;
-    let people = [];
-    gotData.forEach((person) => {
-      people.push(person.family);
+    const families = [];
+    data.forEach((d) => {
+      families.push(d.family);
     });
-    people = cleanNames(people);
-    houses = removeDups(people);
-    counts = buildCountList(people, houses);
+    const houseNames = cleanNames(families);
+    houseNameLabels = removeDupes(houseNames);
+    houseNameCounts = buildCountList(houseNames, houseNameLabels);
   })
   .then(renderChart)
   .catch((err) => console.log(err));
-
-// renderChart();
