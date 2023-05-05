@@ -116,4 +116,5 @@ fetch(url)
     houseNameCounts = buildCountList(houseNames, houseNameLabels);
   })
   .then(renderChart)
+  /* eslint-disable no-console */
   .catch((err) => console.log(err));
