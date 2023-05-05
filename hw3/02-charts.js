@@ -27,13 +27,18 @@ const borderColors = [
 ];
 /**
  * Uses array destructuring and the Set constructor to remove duplicates
+ * from an array.
  */
 const removeDupes = function removeDupes(arr) {
   return [...new Set(arr)];
 };
 
 /**
- * Returns an array without typos and everyone who is not in a house removed.
+ * Returns an array of family names with typos removed and everyone who is not
+ * in a house removed.
+ * This function works by first making sure that every house family member name
+ * starts with 'House ' and is spelled correctly, then removes any family names
+ * that don't start with house and sorts the remaining alphabetically.
  */
 const cleanNames = function cleanNames(data) {
   const result = [];
