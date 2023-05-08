@@ -1,3 +1,21 @@
 .App {
-  /* text-align: center; */
+  text-align: center;
+}
+
+h1 {
+  padding: 2rem;
+}
+
+.Navbar {
+  padding: 2rem;
+}
+
+.Navbar .nav-link {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.Navbar ul {
+  margin-bottom: 0px;
 }
