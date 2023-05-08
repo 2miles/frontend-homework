@@ -7,7 +7,7 @@ h1 {
 }
 
 .Navbar {
-  padding: 2rem;
+  padding: 0rem;
 }
 
 .Navbar .nav-link {
@@ -18,4 +18,12 @@ h1 {
 
 .Navbar ul {
   margin-bottom: 0px;
+}
+
+.card {
+  width: 400px;
+}
+
+#search-container {
+  max-width: 600px;
 }

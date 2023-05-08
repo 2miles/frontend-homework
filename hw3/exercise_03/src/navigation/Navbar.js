@@ -7,16 +7,22 @@ import Houses from './../views/Houses';
 export default function Navbar() {
   return (
     <div className="Navbar">
-      <nav className="navbar bg-light">
+      <nav className="navbar bg-dark">
         <ul className="navbar">
           <li className="nav-link">
-            <Link to="/">Home</Link>
+            <Link className="text-light" to="/">
+              Home
+            </Link>
           </li>
           <li className="nav-link">
-            <Link to="/search">Search</Link>
+            <Link className="text-light" to="/search">
+              Search
+            </Link>
           </li>
           <li className="nav-link">
-            <Link to="/houses">Houses</Link>
+            <Link className="text-light" to="/houses">
+              Houses
+            </Link>
           </li>
         </ul>
       </nav>

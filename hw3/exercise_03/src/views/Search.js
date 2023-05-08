@@ -20,7 +20,9 @@ export default function Search() {
     //Search by exactly first and last name
     if ((names.length = 2)) {
       results = characters.filter(
-        (e) => e.firstName.includes(names[0]) && e.lastName.includes(names[1]),
+        (e) =>
+          e.firstName.toLowerCase().includes(names[0]) &&
+          e.lastName.toLowerCase().includes(names[1]),
       );
     }
     //Search by either first or last name
@@ -28,7 +30,8 @@ export default function Search() {
       if (names[0] !== '') {
         results = characters.filter(
           (e) =>
-            e.firstName.includes(names[0]) || e.lastName.includes(names[0]),
+            e.firstName.toLowerCase().includes(names[0]) ||
+            e.lastName.toLowerCase().includes(names[0]),
         );
       }
     }
@@ -36,18 +39,22 @@ export default function Search() {
   };
 
   return (
-    <div>
+    <div className="d-flex flex-column align-items-center">
       <h1> Search Page</h1>
-      <div className="d-flex justify-content-center">
+      <div className="d-flex justify-content-center" id="search-container">
         <div className="container-sm border rounded  p-3 bg-light">
           <h2>Search for a Character</h2>
           <p className="mt-4">
-            Enter the name of a Game of Thrones character to display their name
-            and picture.
+            Enter the names Game of Thrones characters to display their names
+            and pictures. Search by first name, last name, or a partial name
+            match.
           </p>
           <div className="mt-4">
-            <label htmlFor="character-input">Character Name:</label>
+            <label htmlFor="character-input" className="fw-bold mx-2">
+              Character Name:
+            </label>
             <input
+              className="mb-3"
               id="character-input"
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
@@ -59,8 +66,21 @@ export default function Search() {
           <div>
             {filteredCharacters.map((character, index) => {
               return (
-                <div key={index}>
-                  {character.firstName} {character.lastName}
+                <div key={index} className="d-flex justify-content-center">
+                  <div className="card border-1 m-3 text-center">
+                    <img
+                      className="card-img-top p-3"
+                      src={character.imageUrl}
+                      width="400px"
+                      height="400px"
+                      alt="character"
+                    ></img>
+                    <div className="card-body">
+                      <h4 className="card-title fw-bold">
+                        {character.firstName} {character.lastName}
+                      </h4>
+                    </div>
+                  </div>
                 </div>
               );
             })}
