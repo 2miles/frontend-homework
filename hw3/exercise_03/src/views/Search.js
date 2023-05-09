@@ -15,7 +15,7 @@ export default function Search() {
   }, []);
 
   const handleInput = (input) => {
-    const names = input.split(' ');
+    const names = input.toLowerCase().split(' ');
     let results = [];
     //Search by exactly first and last name
     if ((names.length = 2)) {
