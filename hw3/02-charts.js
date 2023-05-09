@@ -35,7 +35,7 @@ const removeDupes = function removeDupes(arr) {
 
 /**
  * Returns an array of family names with typos removed and everyone who is not
- * in a house removed.
+ * in a house has house name changed to 'No House'.
  * This function works by first making sure that every house family member name
  * starts with 'House ' and is spelled correctly, then removes any family names
  * that don't start with house and sorts the remaining alphabetically.
@@ -57,6 +57,8 @@ const cleanNames = function cleanNames(data) {
       goodName = 'House Greyjoy';
     } else if (name.includes('Tyrell')) {
       goodName = 'House Tyrell';
+    } else if (!name.includes('House')) {
+      goodName = 'No House';
     }
     result.push(goodName);
   });
