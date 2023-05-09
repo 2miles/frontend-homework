@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-
+import CharacterCard from './../components/CharacterCard';
 export default function Search() {
   const url = 'https://thronesapi.com/api/v2/Characters';
 
@@ -18,7 +18,7 @@ export default function Search() {
     const names = input.toLowerCase().split(' ');
     let results = [];
     //Search by exactly first and last name
-    if ((names.length = 2)) {
+    if (names.length === 2) {
       results = characters.filter(
         (e) =>
           e.firstName.toLowerCase().includes(names[0]) &&
@@ -26,7 +26,7 @@ export default function Search() {
       );
     }
     //Search by either first or last name
-    if ((names.length = 1)) {
+    if (names.length === 1) {
       if (names[0] !== '') {
         results = characters.filter(
           (e) =>
@@ -63,28 +63,9 @@ export default function Search() {
               }}
             />
           </div>
-          <div>
-            {filteredCharacters.map((character, index) => {
-              return (
-                <div key={index} className="d-flex justify-content-center">
-                  <div className="card border-1 m-3 text-center">
-                    <img
-                      className="card-img-top p-3"
-                      src={character.imageUrl}
-                      width="400px"
-                      height="400px"
-                      alt="character"
-                    ></img>
-                    <div className="card-body">
-                      <h4 className="card-title fw-bold">
-                        {character.firstName} {character.lastName}
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          {filteredCharacters.map((character, index) => {
+            return <CharacterCard character={character} index={index} />;
+          })}
         </div>
       </div>
     </div>
