@@ -7,12 +7,12 @@ export default function CharacterCard(props) {
           src={props.character.imageUrl}
           width="400px"
           height="400px"
-          alt="character"
+          alt={`portrait of ${props.character.firstName}`}
         ></img>
         <div className="card-body">
-          <h4 className="card-title fw-bold">
+          <h3 className="card-title fw-bold">
             {props.character.firstName} {props.character.lastName}
-          </h4>
+          </h3>
         </div>
       </div>
     </div>
