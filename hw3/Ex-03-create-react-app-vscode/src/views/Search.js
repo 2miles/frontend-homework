@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import CharacterCard from './../components/CharacterCard';
+import CharacterCard from '../components/CharacterCard';
 export default function Search() {
   const url = 'https://thronesapi.com/api/v2/Characters';
 

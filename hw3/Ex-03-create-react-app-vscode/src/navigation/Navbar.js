@@ -1,8 +1,8 @@
 import { Route, Routes, Link } from 'react-router-dom';
 
-import Home from './../views/Home';
-import Search from './../views/Search';
-import Houses from './../views/Houses';
+import Home from '../views/Home';
+import Search from '../views/Search';
+import Houses from '../views/Houses';
 
 export default function Navbar() {
   return (

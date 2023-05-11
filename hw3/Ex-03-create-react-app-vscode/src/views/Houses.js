@@ -1,12 +1,8 @@
 import 'chart.js/auto';
 import { useEffect, useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import { backgroundColors, borderColors } from './../utils/chartColors';
-import {
-  cleanNames,
-  removeDupes,
-  buildCountList,
-} from './../utils/housesUtils';
+import { backgroundColors, borderColors } from '../utils/chartColors';
+import { cleanNames, removeDupes, buildCountList } from '../utils/housesUtils';
 
 const url = 'https://thronesapi.com/api/v2/Characters';
 
