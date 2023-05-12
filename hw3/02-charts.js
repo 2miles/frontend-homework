@@ -46,8 +46,7 @@ const cleanNames = function cleanNames(data) {
     let goodName = name;
     if (name.includes('Targar')) {
       goodName = 'House Targaryen';
-    }
-    if (name.includes('Lan')) {
+    } else if (name.includes('Lan')) {
       goodName = 'House Lannister';
     } else if (name.includes('Stark')) {
       goodName = 'House Stark';
@@ -118,6 +117,7 @@ fetch(url)
     data.forEach((d) => {
       families.push(d.family);
     });
+    console.log(families.sort());
     const houseNames = cleanNames(families);
     houseNameLabels = removeDupes(houseNames);
     houseNameCounts = buildCountList(houseNames, houseNameLabels);
