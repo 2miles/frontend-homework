@@ -17,25 +17,24 @@ export const cleanNames = function cleanNames(data) {
   const result = [];
   data.forEach((name) => {
     let goodName = name;
-    if (name.includes("Targar")) {
-      goodName = "House Targaryen";
-    }
-    if (name.includes("Lan")) {
-      goodName = "House Lannister";
-    } else if (name.includes("Stark")) {
-      goodName = "House Stark";
-    } else if (name.includes("Bara")) {
-      goodName = "House Baratheon";
-    } else if (name.includes("Grey")) {
-      goodName = "House Greyjoy";
-    } else if (name.includes("Tyrell")) {
-      goodName = "House Tyrell";
-    } else if (!name.includes("House")) {
-      goodName = "No House";
+    if (name.includes('Targar')) {
+      goodName = 'House Targaryen';
+    } else if (name.includes('Lan')) {
+      goodName = 'House Lannister';
+    } else if (name.includes('Stark')) {
+      goodName = 'House Stark';
+    } else if (name.includes('Bara')) {
+      goodName = 'House Baratheon';
+    } else if (name.includes('Grey')) {
+      goodName = 'House Greyjoy';
+    } else if (name.includes('Tyrell')) {
+      goodName = 'House Tyrell';
+    } else if (!name.includes('House')) {
+      goodName = 'No House';
     }
     result.push(goodName);
   });
-  return result.filter((name) => name.includes("House")).sort();
+  return result.filter((name) => name.includes('House')).sort();
 };
 
 /**

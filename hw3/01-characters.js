@@ -10,17 +10,13 @@ fetch(url)
     characters.forEach((character) => {
       /** create card div */
       const divCard = document.createElement('divCard');
-      divCard.classList.add('card');
-      divCard.classList.add('border-0');
-      divCard.classList.add('m-3');
-      divCard.classList.add('text-center');
+      divCard.className = 'card border-0 m-3 text-center';
       divCard.style.width = '250px';
       divCard.style.backgroundColor = 'var(--cyan)';
 
       /** create img */
       const pic = document.createElement('img');
-      pic.classList.add('card-img-top');
-      pic.classList.add('p-3');
+      pic.className = 'card-img-top p-3';
       pic.setAttribute('src', character.imageUrl);
       pic.setAttribute('width', '220px');
       pic.setAttribute('height', '260px');
@@ -31,14 +27,12 @@ fetch(url)
 
       /** create name h5 */
       const fullName = document.createElement('h5');
-      fullName.classList.add('card-title');
-      fullName.classList.add('fw-bold');
+      fullName.className = 'card-title fw-bold';
       fullName.innerHTML = `${character.firstName} ${character.lastName}`;
 
       /** create title p */
       const title = document.createElement('p');
-      title.classList.add('card-text');
-      title.classList.add('fw-bold');
+      title.className = 'card-text fw-bold';
       title.innerHTML = `${character.title}`;
 
       /** add elements to card and add card to DOM */
