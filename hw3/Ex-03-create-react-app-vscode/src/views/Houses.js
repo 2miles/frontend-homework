@@ -1,4 +1,5 @@
 import 'chart.js/auto';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { backgroundColors, borderColors } from '../utils/chartColors';
@@ -10,11 +11,11 @@ export default function Houses() {
   const [doughnutData, setDoughnutData] = useState({});
 
   useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
+    axios
+      .get(url)
+      .then((res) => {
         const families = [];
-        data.forEach((d) => {
+        res.data.forEach((d) => {
           families.push(d.family);
         });
         const houseNames = cleanNames(families);
