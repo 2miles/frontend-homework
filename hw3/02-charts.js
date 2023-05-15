@@ -80,8 +80,8 @@ const buildCountList = function buildCountList(people, houses) {
   return counts;
 };
 
-let houseNameLabels = [];
-let houseNameCounts = [];
+let chartLabels = [];
+let counts = [];
 
 const renderChart = () => {
   const donutChart = document.querySelector('.donut-chart');
@@ -89,11 +89,11 @@ const renderChart = () => {
   new Chart(donutChart, {
     type: 'doughnut',
     data: {
-      labels: houseNameLabels,
+      labels: chartLabels,
       datasets: [
         {
           label: 'My First Dataset',
-          data: houseNameCounts,
+          data: counts,
           backgroundColor: backgroundColors,
           borderColor: borderColors,
           borderWidth: 1,
@@ -110,18 +110,27 @@ const renderChart = () => {
 
 // url for the Thrones API
 const url = 'https://thronesapi.com/api/v2/Characters';
-fetch(url)
-  .then((res) => res.json())
-  .then((data) => {
-    const families = [];
-    data.forEach((d) => {
-      families.push(d.family);
-    });
-    console.log(families.sort());
-    const houseNames = cleanNames(families);
-    houseNameLabels = removeDupes(houseNames);
-    houseNameCounts = buildCountList(houseNames, houseNameLabels);
-  })
-  .then(renderChart)
-  /* eslint-disable no-console */
-  .catch((err) => console.log(err));
+
+async function fetchData() {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log('ERROR MESSAGE: ', error);
+  }
+  return null;
+}
+
+async function buildChartData() {
+  const families = [];
+  const data = await fetchData();
+  data.forEach((d) => {
+    families.push(d.family);
+  });
+  const houseNames = cleanNames(families);
+  chartLabels = removeDupes(houseNames);
+  counts = buildCountList(houseNames, chartLabels);
+}
+
+buildChartData().then(renderChart);
