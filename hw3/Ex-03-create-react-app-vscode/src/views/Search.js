@@ -9,9 +9,12 @@ export default function Search() {
   const [searchFailed, setSearchFailed] = useState(false);
 
   useEffect(() => {
-    axios.get(url).then((res) => {
-      setCharacters(res.data);
-    });
+    axios
+      .get(url)
+      .then((res) => {
+        setCharacters(res.data);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   const handleInput = (input) => {
