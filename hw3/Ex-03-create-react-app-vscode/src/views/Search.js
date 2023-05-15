@@ -14,11 +14,6 @@ export default function Search() {
     });
   }, []);
 
-  useEffect(() => {
-    if (searchFailed) {
-    }
-  }, [searchFailed]);
-
   const handleInput = (input) => {
     const names = input.toLowerCase().split(' ');
     let results = [];
