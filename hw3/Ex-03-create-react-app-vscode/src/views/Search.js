@@ -1,18 +1,23 @@
 import { useEffect, useState } from 'react';
 import CharacterCard from '../components/CharacterCard';
+import axios from 'axios';
 export default function Search() {
   const url = 'https://thronesapi.com/api/v2/Characters';
 
   const [characters, setCharacters] = useState([]);
   const [filteredCharacters, setFilteredCharacters] = useState([]);
+  const [searchFailed, setSearchFailed] = useState(false);
 
   useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        setCharacters(data);
-      });
+    axios.get(url).then((res) => {
+      setCharacters(res.data);
+    });
   }, []);
+
+  useEffect(() => {
+    if (searchFailed) {
+    }
+  }, [searchFailed]);
 
   const handleInput = (input) => {
     const names = input.toLowerCase().split(' ');
@@ -35,6 +40,10 @@ export default function Search() {
         );
       }
     }
+    if (results.length === 0) {
+      setSearchFailed(true);
+    }
+
     setFilteredCharacters(results);
   };
 
@@ -66,6 +75,7 @@ export default function Search() {
           {filteredCharacters.map((character, index) => {
             return <CharacterCard character={character} index={index} />;
           })}
+          {searchFailed && <h2>No characters with that name</h2>}
         </div>
       </div>
     </div>
