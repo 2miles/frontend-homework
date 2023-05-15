@@ -42,6 +42,8 @@ export default function Search() {
     }
     if (results.length === 0) {
       setSearchFailed(true);
+    } else {
+      setSearchFailed(false);
     }
 
     setFilteredCharacters(results);
