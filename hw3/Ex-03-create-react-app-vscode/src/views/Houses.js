@@ -32,25 +32,18 @@ export default function Houses() {
     });
   }, [characters]);
 
-  if (isPending) {
-    return <h2>Loading Data...</h2>;
-  }
-  if (error) {
-    return (
-      <div>
-        <h2>Error Loading Data</h2>
-        <p>{error}</p>
-      </div>
-    );
-  }
   return (
     <div className="container d-flex flex-column align-items-center">
       <h1>Houses</h1>
-      <Doughnut
-        className="bg-light p-4 border"
-        id="doughnut"
-        data={doughnutData}
-      />
+      {isPending && <h2>Loading Data...</h2>}
+      {error && <h2>Error Loading Data: {error}</h2>}
+      {!isPending && !error && (
+        <Doughnut
+          className="bg-light p-4 border"
+          id="doughnut"
+          data={doughnutData}
+        />
+      )}
     </div>
   );
 }
