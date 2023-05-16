@@ -1,21 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import CharacterCard from '../components/CharacterCard';
-import axios from 'axios';
+import useFetch from '../hooks/useFetch';
+
 export default function Search() {
   const url = 'https://thronesapi.com/api/v2/Characters';
 
-  const [characters, setCharacters] = useState([]);
   const [filteredCharacters, setFilteredCharacters] = useState([]);
-  const [searchFailed, setSearchFailed] = useState(false);
-
-  useEffect(() => {
-    axios
-      .get(url)
-      .then((res) => {
-        setCharacters(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  const [noResults, setNoResults] = useState(false);
+  const { data: characters, isPending, error } = useFetch(url);
 
   const handleInput = (input) => {
     const names = input.toLowerCase().split(' ');
@@ -38,15 +30,23 @@ export default function Search() {
         );
       }
     }
-    if (results.length === 0) {
-      setSearchFailed(true);
-    } else {
-      setSearchFailed(false);
-    }
-
+    results.length === 0 && input !== ''
+      ? setNoResults(true)
+      : setNoResults(false);
     setFilteredCharacters(results);
   };
 
+  if (isPending) {
+    return <h2>Loading Data...</h2>;
+  }
+  if (error) {
+    return (
+      <div>
+        <h2>Error Loading Data</h2>
+        <p>{error}</p>
+      </div>
+    );
+  }
   return (
     <div className="d-flex flex-column align-items-center">
       <h1> Search Page</h1>
@@ -75,7 +75,7 @@ export default function Search() {
           {filteredCharacters.map((character, index) => {
             return <CharacterCard character={character} index={index} />;
           })}
-          {searchFailed && <h2>No characters with that name</h2>}
+          {noResults && <h2>No characters with that name</h2>}
         </div>
       </div>
     </div>
